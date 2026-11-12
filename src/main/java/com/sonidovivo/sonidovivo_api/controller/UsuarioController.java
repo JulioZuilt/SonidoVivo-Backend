@@ -3,6 +3,7 @@ package com.sonidovivo.sonidovivo_api.controller;
 
 import com.sonidovivo.sonidovivo_api.model.Usuario;
 import com.sonidovivo.sonidovivo_api.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> agregarUsuario(@Valid @RequestBody Usuario usuario){
         Usuario nuevoUsuario = service.saveUsuario(usuario);
 
         return ResponseEntity
@@ -48,7 +49,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> editarUsuario(@RequestBody Usuario usuario, @PathVariable Long id){
+    public ResponseEntity<Usuario> editarUsuario(@Valid @RequestBody Usuario usuario, @PathVariable Long id){
         Optional<Usuario> existe = service.getUsuario(id);
 
         if(existe.isEmpty())

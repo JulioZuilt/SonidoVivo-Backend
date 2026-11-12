@@ -2,6 +2,7 @@ package com.sonidovivo.sonidovivo_api.controller;
 
 import com.sonidovivo.sonidovivo_api.model.Categoria;
 import com.sonidovivo.sonidovivo_api.service.CategoriaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> agregarCategoria(@RequestBody Categoria categoria){
+    public ResponseEntity<Categoria> agregarCategoria(@Valid @RequestBody Categoria categoria){
         Categoria nuevaCategoria = service.saveCategoria(categoria);
 
         return ResponseEntity
@@ -47,7 +48,7 @@ public class CategoriaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> editarCategoria(@RequestBody Categoria categoria, @PathVariable Long id){
+    public ResponseEntity<Categoria> editarCategoria(@Valid @RequestBody Categoria categoria, @PathVariable Long id){
         Optional<Categoria> existe = service.getCategoria(id);
 
         if(existe.isEmpty())

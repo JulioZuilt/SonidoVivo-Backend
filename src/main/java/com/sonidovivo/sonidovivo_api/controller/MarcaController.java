@@ -2,6 +2,7 @@ package com.sonidovivo.sonidovivo_api.controller;
 
 import com.sonidovivo.sonidovivo_api.model.Marca;
 import com.sonidovivo.sonidovivo_api.service.MarcaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class MarcaController {
     }
 
     @PostMapping
-    public ResponseEntity<Marca> agregarMarca(@RequestBody Marca marca){
+    public ResponseEntity<Marca> agregarMarca(@Valid @RequestBody Marca marca){
         Marca nuevaMarca = service.saveMarca(marca);
 
         return ResponseEntity
@@ -47,7 +48,7 @@ public class MarcaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Marca> editarMarca(@RequestBody Marca marca, @PathVariable Long id){
+    public ResponseEntity<Marca> editarMarca(@Valid @RequestBody Marca marca, @PathVariable Long id){
         Optional<Marca> existe = service.getMarca(id);
 
         if(existe.isEmpty())

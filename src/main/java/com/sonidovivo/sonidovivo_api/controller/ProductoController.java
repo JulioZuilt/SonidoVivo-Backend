@@ -2,6 +2,7 @@ package com.sonidovivo.sonidovivo_api.controller;
 
 import com.sonidovivo.sonidovivo_api.model.Producto;
 import com.sonidovivo.sonidovivo_api.service.ProductoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class ProductoController {
     }
 
     @PostMapping
-    public ResponseEntity<Producto> agregarProducto(@RequestBody Producto producto){
+    public ResponseEntity<Producto> agregarProducto(@Valid @RequestBody Producto producto){
         Producto nuevoProducto = service.saveProducto(producto);
 
         return ResponseEntity
@@ -47,7 +48,7 @@ public class ProductoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> editarProducto(@RequestBody Producto producto, @PathVariable Long id){
+    public ResponseEntity<Producto> editarProducto(@Valid @RequestBody Producto producto, @PathVariable Long id){
         Optional<Producto> existe = service.getProducto(id);
 
         if(existe.isEmpty())
